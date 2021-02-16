@@ -46,13 +46,25 @@ class _HomeState extends State<Home> {
 
   void _realChanged(String text){
 
+    double real = double.parse(text);
+    dolarController.text = (real/this.dolar).toStringAsFixed(2);
+    euroController.text = (real/this.euro).toStringAsFixed(2);
+
   }
 
   void _dolarChanged(String text){
 
+    double dolar = double.parse(text);
+    realController.text = (dolar * this.dolar).toStringAsFixed(2);
+    euroController.text = (dolar * this.dolar/this.euro).toStringAsFixed(2);
+
   }
 
   void _euroChanged(String text){
+
+    double euro = double.parse(text);
+    realController.text = (euro * this.euro).toStringAsFixed(2);
+    dolarController.text = (euro * this.euro/this.dolar).toStringAsFixed(2);
 
   }
 
@@ -129,6 +141,6 @@ Widget _buildTextField(String label, String prefix, TextEditingController contro
         color: Colors.amber, fontSize: 25.0
     ),
     onChanged: onChangedEvent,
-    keyboardType: TextInputType.number,
+    keyboardType: TextInputType.numberWithOptions(decimal: true),
   );
 }
